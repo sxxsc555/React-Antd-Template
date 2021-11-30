@@ -15,7 +15,7 @@ function login() {
 				className="login-form"
 				layout="vertical"
 				initialValues={{ remember: false }}
-				onFinish={onFinish}
+				onFinish={ onFinish }
 			>
 				<Form.Item>
 					<img src="src/assets/icons/svg/logo.svg" style={{ width: '50px' }} />
