@@ -1,0 +1,17 @@
+.Sidebar-container {
+	.logo {
+	  display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 54px;
+		white-space:nowrap;
+		overflow: hidden;
+		
+		span {
+			margin-left: 5px;
+			color: white;
+			font-weight: bold;
+			font-size: $standard-font-size-normal;
+		}
+	}
+}
