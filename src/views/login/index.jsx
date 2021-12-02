@@ -1,11 +1,16 @@
 import React from 'react'
 import './index.scss'
+import { Form, Input, Button, Checkbox } from 'antd'
+import { setUserInfoAction } from '@/store/user/action'
+import { connect } from 'react-redux'
 
-import { Form, Input, Button, Checkbox } from 'antd';
+const mapDispatchToProps = (dispatch) => ({
+	setUserInfo: (info) => dispatch(setUserInfoAction(info))
+})
 
-function login() {
+function login({ setUserInfo }) {
 	const onFinish = (values) => {
-		console.log('Success:', values)
+		setUserInfo(values)
 	}
 
 	return (
@@ -55,4 +60,4 @@ function login() {
 	)
 }
 
-export default login
+export default connect(null, mapDispatchToProps)(login)
