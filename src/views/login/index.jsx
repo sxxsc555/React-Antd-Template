@@ -3,14 +3,19 @@ import './index.scss'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { setUserInfoAction } from '@/store/user/action'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const mapDispatchToProps = (dispatch) => ({
 	setUserInfo: (info) => dispatch(setUserInfoAction(info))
 })
 
 function login({ setUserInfo }) {
+	const navigate = useNavigate()
+	console.log(navigate)
+	
 	const onFinish = (values) => {
 		setUserInfo(values)
+		navigate('/')
 	}
 
 	return (
@@ -19,7 +24,7 @@ function login({ setUserInfo }) {
 				name="normal_login"
 				className="login-form"
 				layout="vertical"
-				initialValues={{ remember: false }}
+				initialValues={{ remember: true }}
 				onFinish={ onFinish }
 			>
 				<Form.Item>

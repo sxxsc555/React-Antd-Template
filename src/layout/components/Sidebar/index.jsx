@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Menu } from 'antd'
 import './index.scss'
 import {
@@ -6,24 +6,27 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
-function Sidebar() {
+function Sidebar(props) {
+	const { collapsed } = props
+
 	return (
 		<div className="Sidebar-container">
 			<div className="logo">
 				<img src="src/assets/icons/svg/logo.svg" style={{ width: '30px' }} />
-				<span v-show="!collapsed">React-Antd-Template</span>
+				<span style={{ display: !collapsed ? 'block' : 'none' }}>React-Antd-Template</span>
 			</div>
 			
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 				<Menu.Item key="1" icon={<UserOutlined />}>
-					nav 1
+					<Link to="/one1">one1</Link>
 				</Menu.Item>
 				<Menu.Item key="2" icon={<VideoCameraOutlined />}>
-					nav 2
+				<Link to="/one2">one2</Link>
 				</Menu.Item>
 				<Menu.Item key="3" icon={<UploadOutlined />}>
-					nav 3
+				<Link to="/one3">one3</Link>
 				</Menu.Item>
 			</Menu>
 		</div>
