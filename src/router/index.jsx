@@ -5,59 +5,71 @@ import {
   Route,
   Navigate
 } from 'react-router-dom'
+import { Spin } from 'antd'
 import store from '@/store'
 import Layout from '@/layout/index'
 
-// import One1 from '@/views/one1/index'
-
-const One1 = lazy(() => import('@/views/one1/index'))
-const One2 = lazy(() => import('@/views/one2/index'))
-const One3 = lazy(() => import('@/views/one3/index'))
-
 const routes = [
+  {
+    path: '/login',
+    component: lazy(() => import('@/views/login/index'))
+  },
   {
     path: '/',
     component: Layout,
     children: [
       {
-        path: 'one1',
-        component: lazy(() => import('@/views/one1/index'))
+        path: 'home',
+        component: lazy(() => import('@/views/home/index'))
       }
     ]
   },
   {
-    path: '/login',
-    component: lazy(() => import('@/views/login/index'))
-  }
+    path: '/one',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: lazy(() => import('@/views/one/index'))
+      }
+    ]
+  },
+  {
+    path: '/two',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: lazy(() => import('@/views/two/index'))
+      }
+    ]
+  },
 ]
+
+function getRoutes(routes) {
+  return routes.map((route) => {
+    if (route.children) {
+      return (
+        <Route key={route.path} path={route.path} element={<route.component />} >
+          {getRoutes(route.children)}
+        </Route>
+      )
+    } else {
+      return (
+        <Route key={route.path} path={route.path} element={<route.component />} />
+      )
+    }
+  })
+}
 
 function router() {
   const { token } = store.getState().user
 
   return (
     <Router>
-      <Suspense fallback={<div>ladding...</div>}>
+      <Suspense fallback={<Spin />}>
         <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route path='one1' element={<One1 />} />
-            <Route path='one2' element={<One2 />} />
-            <Route path='one3' element={<One3 />} />
-          </Route>
-          {/* {
-          routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                <Suspense fallback={<div>ladding...</div>}>
-                  <route.component />
-                </Suspense>
-              }
-            >
-              { route.children !== 0 && router() }
-            </Route>
-          ))
-        } */}
+          { getRoutes(routes) }
         </Routes>
       </Suspense>
     </Router >
