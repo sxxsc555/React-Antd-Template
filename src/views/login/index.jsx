@@ -1,11 +1,21 @@
 import React from 'react'
 import './index.scss'
+import { Form, Input, Button, Checkbox } from 'antd'
+import { setUserInfoAction } from '@/store/user/action'
+import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { Form, Input, Button, Checkbox } from 'antd';
+const mapDispatchToProps = (dispatch) => ({
+	setUserInfo: (info) => dispatch(setUserInfoAction(info))
+})
 
-function login() {
+function login({ setUserInfo }) {
+	const navigate = useNavigate()
+	console.log(navigate)
+	
 	const onFinish = (values) => {
-		console.log('Success:', values)
+		setUserInfo(values)
+		navigate('/')
 	}
 
 	return (
@@ -14,8 +24,8 @@ function login() {
 				name="normal_login"
 				className="login-form"
 				layout="vertical"
-				initialValues={{ remember: false }}
-				onFinish={onFinish}
+				initialValues={{ remember: true }}
+				onFinish={ onFinish }
 			>
 				<Form.Item>
 					<img src="src/assets/icons/svg/logo.svg" style={{ width: '50px' }} />
@@ -55,4 +65,4 @@ function login() {
 	)
 }
 
-export default login
+export default connect(null, mapDispatchToProps)(login)
