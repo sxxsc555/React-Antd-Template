@@ -20,13 +20,13 @@ function Sidebar(props) {
 
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 				<Menu.Item key="1" icon={<UserOutlined />}>
-					<Link to="/home">home</Link>
+					<Link to="/">home</Link>
 				</Menu.Item>
 				<Menu.Item key="2" icon={<VideoCameraOutlined />}>
-					<Link to="/one/index">one</Link>
+					<Link to="/one">one</Link>
 				</Menu.Item>
 				<Menu.Item key="3" icon={<UploadOutlined />}>
-					<Link to="/two/index">two</Link>
+					<Link to="/two">two</Link>
 				</Menu.Item>
 			</Menu>
 		</div>

@@ -11,9 +11,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 function login({ setUserInfo }) {
 	const navigate = useNavigate()
-	console.log(navigate)
 	
-	const onFinish = (values) => {
+	function onFinish(values) {
 		setUserInfo(values)
 		navigate('/')
 	}

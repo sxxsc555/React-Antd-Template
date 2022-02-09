@@ -1,4 +1,4 @@
-import { setToken, getToken } from '@/utils/cookie'
+import { setToken, getToken, removeToken } from '@/utils/cookie'
 
 const userState = {
   username: '',
@@ -21,6 +21,7 @@ function reducer(state = userState, action) {
       }
     }
     case 'DELETE_USERINFO': {
+      removeToken('token')
       return null
     }
     default: {

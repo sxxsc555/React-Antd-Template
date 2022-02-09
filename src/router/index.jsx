@@ -19,7 +19,7 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: 'home',
+        path: 'index',
         component: lazy(() => import('@/views/home/index'))
       }
     ]
@@ -55,9 +55,15 @@ function getRoutes(routes) {
         </Route>
       )
     } else {
-      return (
-        <Route key={route.path} path={route.path} element={<route.component />} />
-      )
+      if(route.path === 'index') {
+        return (
+          <Route key={route.path} index element={<route.component />} />
+        )
+      } else {
+        return (
+          <Route key={route.path} path={route.path} element={<route.component />} />
+        )
+      }
     }
   })
 }
@@ -69,6 +75,7 @@ function router() {
     <Router>
       <Suspense fallback={<Spin />}>
         <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
           { getRoutes(routes) }
         </Routes>
       </Suspense>
